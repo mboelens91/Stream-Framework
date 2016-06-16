@@ -9,6 +9,8 @@ STREAM_REDIS_CONFIG = {
     },
 }
 
+STREAM_KEY_PREFIX = ""
+
 STREAM_CASSANDRA_HOSTS = ['localhost']
 
 STREAM_DEFAULT_KEYSPACE = 'stream_framework'

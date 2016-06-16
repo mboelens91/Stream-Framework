@@ -3,6 +3,7 @@ import operator
 from functools import wraps
 import sys
 import six
+from stream_framework import settings
 
 
 class Promise(object):
@@ -390,3 +391,7 @@ else:
                 opfunc.__doc__ = getattr(int, opname).__doc__
                 setattr(cls, opname, opfunc)
         return cls
+
+
+def format_key(key_format, data={}):
+    return settings.STREAM_KEY_PREFIX + key_format % data
