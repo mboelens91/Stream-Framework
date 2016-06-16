@@ -2,6 +2,7 @@ from stream_framework.feeds.aggregated_feed.base import AggregatedFeed
 from stream_framework.serializers.aggregated_activity_serializer import \
     NotificationSerializer
 from stream_framework.storage.redis.timeline_storage import RedisTimelineStorage
+from stream_framework.utils.functional import format_key
 import copy
 import json
 import logging
@@ -51,10 +52,10 @@ class NotificationFeed(AggregatedFeed):
 
         # location to which we denormalize the count
         self.format_dict = dict(user_id=user_id)
-        self.count_key = self.count_format % self.format_dict
+        self.count_key = format_key(self.count_format, self.format_dict)
         # set the pubsub key if we're using it
         self.pubsub_key = user_id
-        self.lock_key = self.lock_format % self.format_dict
+        self.lock_key = format_key(self.lock_format, self.format_dict)
         from stream_framework.storage.redis.connection import get_redis_connection
         self.redis = get_redis_connection()
 

@@ -1,3 +1,5 @@
+from stream_framework.utils.functional import format_key
+
 class BaseListsStorage(object):
     '''
     A storage used to simultaneously track data in one or more lists.
@@ -66,8 +68,8 @@ class BaseListsStorage(object):
         '''
         Provides the key for a given list
         '''
-        return self.key_format % {'key': self.base_key,
-                                  'list': list_name}
+        return format_key(
+            self.key_format, {'key': self.base_key, 'list': list_name})
 
     def add(self, **kwargs):
         '''

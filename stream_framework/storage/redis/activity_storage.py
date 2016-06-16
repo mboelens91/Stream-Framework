@@ -1,6 +1,7 @@
 from stream_framework.storage.base import BaseActivityStorage
 from stream_framework.storage.redis.structures.hash import ShardedHashCache
 from stream_framework.serializers.activity_serializer import ActivitySerializer
+from stream_framework.utils.functional import format_key
 import six
 
 
@@ -12,7 +13,7 @@ class RedisActivityStorage(BaseActivityStorage):
     default_serializer_class = ActivitySerializer
 
     def get_key(self):
-        return self.options.get('key', 'global')
+        return format_key(self.options.get('key', 'global'))
 
     def get_cache(self):
         key = self.get_key()

@@ -6,6 +6,7 @@ from stream_framework.serializers.simple_timeline_serializer import \
     SimpleTimelineSerializer
 from stream_framework.storage.base import BaseActivityStorage, BaseTimelineStorage
 from stream_framework.activity import Activity
+from stream_framework.utils.functional import format_key
 from stream_framework.utils.validate import validate_list_of_strict
 from stream_framework.tests.utils import FakeActivity
 
@@ -117,7 +118,7 @@ class BaseFeed(object):
         '''
         self.user_id = user_id
         self.key_format = self.key_format
-        self.key = self.key_format % {'user_id': self.user_id}
+        self.key = format_key(self.key_format, {'user_id': self.user_id})
 
         self.timeline_storage = self.get_timeline_storage()
         self.activity_storage = self.get_activity_storage()
