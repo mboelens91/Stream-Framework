@@ -1,7 +1,7 @@
 Stream Framework
 ----------------
 
-[![Build Status](https://travis-ci.org/tschellenbach/Stream-Framework.png?branch=master)](https://travis-ci.org/tschellenbach/Stream-Framework)
+[![Build Status](https://travis-ci.org/tschellenbach/Stream-Framework.svg?branch=master)](https://travis-ci.org/tschellenbach/Stream-Framework)
 [![PyPI version](https://badge.fury.io/py/stream-framework.svg)](http://badge.fury.io/py/stream-framework)
 
 
@@ -56,23 +56,20 @@ Installation through pip is recommended::
 
     $ pip install stream-framework
 
-By default stream-framework installs the required dependencies for redis and cassandra (cassandra-driver 2.7)
+By default stream-framework does not install the required dependencies for redis and cassandra
 
-***Install stream-framework without Cassandra (redis only)***
+***Install stream-framework with Redis dependencies***
 
-    $ pip install stream-framework --install-option="--no-cassandra"
+    $ pip install stream-framework[redis]
 
-    or
+***Install stream-framework with Cassandra dependencies***
 
-    $ python setup.py install --no-cassandra
+    $ pip install stream-framework[cassandra]
 
-***Install stream-framework and use Cassandra 3***
+***Install stream-framework with both Redis and Cassandra dependencies***
 
-    $ pip install stream-framework --install-option="--cassandra3"
+    $ pip install stream-framework[redis,cassandra]
 
-    or
-
-    $ python setup.py install --cassandra3
 
 **Authors & Contributors**
 
@@ -99,7 +96,7 @@ We've included a [Pinterest like example application] [example_app_link] based o
  
 
 [mellowmorning_example]: http://www.mellowmorning.com/2013/10/18/scalable-pinterest-tutorial-feedly-redis/
-[Documentation]: https://stream-framework.readthedocs.org/
+[Documentation]: https://stream-framework.readthedocs.io/
 [Bug Tracker]: https://github.com/tschellenbach/Stream-Framework/issues
 [Code]: http://github.com/tschellenbach/Stream-Framework
 [Travis CI]: http://travis-ci.org/tschellenbach/Stream-Framework/

@@ -178,6 +178,9 @@ class TestBaseFeed(unittest.TestCase):
             activity = self.activity_class(
                 i, LoveVerb, i, i, datetime.datetime.now(), {})
             activities.append(activity)
+            # needed to make sure all activities have a different timestamp
+            # otherwise trim might delete more than we want
+            time.sleep(0.01)
             self.test_feed.add_many([activity])
 
         self.test_feed.insert_activities(activities)
@@ -211,15 +214,16 @@ class TestBaseFeed(unittest.TestCase):
     def test_feed_indexof_large(self):
         assert self.test_feed.count() == 0
         activity_dict = {}
+        now = datetime.datetime.now()
         for i in range(150):
-            moment = datetime.datetime.now() - datetime.timedelta(seconds=i)
+            moment = now - datetime.timedelta(seconds=i)
             activity = self.activity_class(i, LoveVerb, i, i, time=moment)
             activity_dict[i] = activity
         self.test_feed.insert_activities(activity_dict.values())
-        self.test_feed.add_many(activity_dict.values())
+        self.test_feed.add_many(activity_dict.values(), trim=False)
 
         # give cassandra a moment
-        time.sleep(0.1)
+        time.sleep(1)
 
         activity = activity_dict[110]
         index_of = self.test_feed.index_of(activity.serialization_id)
